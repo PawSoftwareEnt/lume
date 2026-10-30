@@ -43,13 +43,21 @@
     radial-gradient(1.5px 1.5px at 40% 8%,#fff9 50%,transparent 51%),radial-gradient(1px 1px at 63% 33%,#fff6 50%,transparent 51%),
     radial-gradient(1px 1px at 88% 41%,#fff5 50%,transparent 51%),radial-gradient(1px 1px at 25% 45%,#fff5 50%,transparent 51%),
     radial-gradient(1.5px 1.5px at 6% 60%,#fff7 50%,transparent 51%),radial-gradient(1px 1px at 52% 18%,#fff6 50%,transparent 51%)}
-  .beam{position:absolute;left:50%;bottom:22%;width:160vmax;height:160vmax;margin-left:-80vmax;margin-bottom:-80vmax;
-        background:conic-gradient(from 0deg,transparent 0deg,rgba(255,217,138,.16) 8deg,transparent 18deg,transparent 180deg,rgba(255,217,138,.10) 188deg,transparent 198deg);
+  .moon{position:absolute;left:12%;top:16%;width:clamp(50px,7vw,90px);aspect-ratio:1;border-radius:50%;
+        background:radial-gradient(circle at 40% 40%,#f4f1e8,#c9cfd8);box-shadow:0 0 60px 15px rgba(200,215,240,.18);opacity:.85}
+  .sea{position:absolute;left:0;right:0;bottom:0;height:14%;background:linear-gradient(#0a1830,#03060c);z-index:1}
+  .lh{position:absolute;left:80%;bottom:12%;height:clamp(240px,46vh,440px);aspect-ratio:140/300;transform:translateX(-50%);z-index:1}
+  .lh svg{width:100%;height:100%;display:block;overflow:visible}
+  .beam{position:absolute;left:50%;top:14.3%;width:220vmax;height:220vmax;transform:translate(-50%,-50%);pointer-events:none;
+        background:conic-gradient(from 0deg,transparent 0deg,rgba(255,217,138,.22) 6deg,transparent 14deg,transparent 180deg,rgba(255,217,138,.14) 186deg,transparent 194deg);
+        -webkit-mask:radial-gradient(circle,#000 0,#000 18%,transparent 50%);mask:radial-gradient(circle,#000 0,#000 18%,transparent 50%);
         animation:spin 14s linear infinite;opacity:0;transition:opacity 1.5s}
   .hero.lit .beam{opacity:1}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .lighthouse{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:120px;opacity:.9}
-  .sea{position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(#08142a,#03060c)}
+  .lamp{position:absolute;left:50%;top:14.3%;width:60px;height:60px;transform:translate(-50%,-50%);border-radius:50%;
+        background:radial-gradient(circle,rgba(255,230,170,.95),rgba(255,217,138,.35) 40%,transparent 70%);opacity:0;transition:opacity 1.5s}
+  .hero.lit .lamp{opacity:1}
+  @keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  @media(max-width:700px){.lh{left:88%;height:clamp(170px,26vh,240px)}.moon{top:12%}}
   .hero-inner{position:relative;z-index:2;padding:100px 20px 180px}
   .eyebrow{color:var(--muted);letter-spacing:.3em;font-size:.78rem;text-transform:uppercase}
   h1{font-family:Cinzel,serif;font-size:clamp(3.4rem,13vw,8rem);letter-spacing:.12em;line-height:1;margin:.25em 0 .15em;
@@ -124,14 +132,34 @@
 
 <header class="hero" id="top">
   <div class="stars"></div>
-  <div class="beam"></div>
-  <svg class="lighthouse" viewBox="0 0 120 220" aria-hidden="true">
-    <rect x="48" y="24" width="24" height="18" fill="#ffd98a" opacity=".9"/>
-    <polygon points="44,24 76,24 60,8" fill="#1a2a44"/>
-    <polygon points="44,42 76,42 86,200 34,200" fill="#13213a"/>
-    <rect x="40" y="80" width="40" height="8" fill="#0c1628"/>
-    <rect x="37" y="130" width="46" height="8" fill="#0c1628"/>
-  </svg>
+  <div class="moon"></div>
+  <div class="lh" aria-hidden="true">
+    <div class="beam"></div>
+    <svg viewBox="0 0 140 300">
+      <defs>
+        <linearGradient id="tw" x1="0" x2="1"><stop offset="0" stop-color="#2b4066"/><stop offset=".55" stop-color="#1a2a46"/><stop offset="1" stop-color="#0d1628"/></linearGradient>
+      </defs>
+      <!-- rock -->
+      <path d="M-30 300 Q0 262 30 266 Q55 250 85 258 Q120 248 170 300Z" fill="#0b1424"/>
+      <!-- tower -->
+      <polygon points="52,62 88,62 100,268 40,268" fill="url(#tw)"/>
+      <polygon points="50,120 90,120 91,132 49,132" fill="#c8d6ec" opacity=".18"/>
+      <polygon points="46,190 94,190 95,202 45,202" fill="#c8d6ec" opacity=".18"/>
+      <!-- gallery -->
+      <rect x="44" y="56" width="52" height="7" rx="2" fill="#2b4066"/>
+      <!-- lantern room -->
+      <rect x="54" y="30" width="32" height="26" fill="#ffe2a0"/>
+      <rect x="69" y="30" width="2" height="26" fill="#2b4066" opacity=".6"/>
+      <!-- roof -->
+      <polygon points="50,31 90,31 70,10" fill="#2b4066"/>
+      <circle cx="70" cy="9" r="3" fill="#2b4066"/>
+      <!-- windows -->
+      <rect x="66" y="96" width="8" height="12" rx="1" fill="#ffd98a" opacity=".85"/>
+      <rect x="66" y="158" width="8" height="12" rx="1" fill="#ffd98a" opacity=".85"/>
+      <rect x="66" y="222" width="8" height="12" rx="1" fill="#ffd98a" opacity=".85"/>
+    </svg>
+    <div class="lamp"></div>
+  </div>
   <div class="sea"></div>
   <div class="hero-inner">
     <div class="eyebrow" data-i18n="hero.eyebrow">Paw Software Entertainment presents</div>
@@ -140,7 +168,7 @@
     <p class="tag" data-i18n="hero.tag">A small robot. A coast swallowed by darkness. A lighthouse that must shine again.</p>
     <div class="btns">
       <a class="btn primary" href="#media" data-i18n="hero.cta1">Watch the devlog</a>
-      <a class="btn" href="https://github.com/disti84/Lume" target="_blank" rel="noopener" data-i18n="hero.cta2">Follow on GitHub</a>
+      <a class="btn" href="https://github.com/PawSoftwareEnt" target="_blank" rel="noopener" data-i18n="hero.cta2">Follow on GitHub</a>
     </div>
     <div class="status" data-i18n="hero.status">● In development — demo coming soon</div>
   </div>
@@ -193,7 +221,7 @@
     <p data-i18n="studio.p">Paw Software Entertainment is an independent game studio from Sicily. We make games with heart, one pixel — and one paw — at a time.</p>
     <div class="btns">
       <a class="btn primary" href="https://www.youtube.com/@PawSoftwareEnt" target="_blank" rel="noopener">YouTube</a>
-      <a class="btn" href="https://github.com/disti84" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://github.com/PawSoftwareEnt" target="_blank" rel="noopener">GitHub</a>
     </div>
   </div>
 </section>
